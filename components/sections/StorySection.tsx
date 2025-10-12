@@ -26,7 +26,7 @@ export default function StorySection() {
               </p>
 
               <p className="text-primary-dark font-bold text-xl border-l-4 border-primary pl-4">
-                "매수인만을 위한 중개사가 필요하다"
+                &ldquo;매수인만을 위한 중개사가 필요하다&rdquo;
               </p>
 
               <p>
