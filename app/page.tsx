@@ -7,6 +7,7 @@ import ProcessSection from '@/components/sections/ProcessSection';
 import CredentialsSection from '@/components/sections/CredentialsSection';
 import StorySection from '@/components/sections/StorySection';
 import ServiceAreaSection from '@/components/sections/ServiceAreaSection';
+import ReviewsSection from '@/components/sections/ReviewsSection';
 import CTASection from '@/components/sections/CTASection';
 import FAQSection from '@/components/sections/FAQSection';
 
@@ -22,6 +23,7 @@ export default function Home() {
       <CredentialsSection />
       <StorySection />
       <ServiceAreaSection />
+      <ReviewsSection />
       <CTASection />
       <FAQSection />
 
