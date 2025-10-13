@@ -5,27 +5,27 @@ import Image from 'next/image';
 export default function ReviewsSection() {
   const reviews = [
     {
-      title: '고덕그라시움 계약 정00 고객 후기',
+      title: '고덕그라시움 정00 고객 후기',
       image: '/images/reviews/review-1.jpg',
     },
     {
-      title: '고덕센트럴푸르지오 계약 김00 고객 후기',
+      title: '고덕센트럴푸르지오 김00 고객 후기',
       image: '/images/reviews/review-2.jpg',
     },
     {
-      title: '하남힐즈파크푸르지오 오00 고객 후기',
+      title: '미사강변푸르지오 오00 고객 후기',
       image: '/images/reviews/review-3.jpg',
     },
     {
-      title: '미사강변골든센트로 계약 최00 고객 후기',
+      title: '미사강변골든센트로 최00 고객 후기',
       image: '/images/reviews/review-4.jpg',
     },
     {
-      title: '고덕숲아이파크 계약 송00 고객 후기',
+      title: '고덕래미안힐스테이트 송0 고객 후기',
       image: '/images/reviews/review-5.jpg',
     },
     {
-      title: '고덕아르테온 계약 홍00 고객 후기',
+      title: '고덕아르테온 홍00 고객 후기',
       image: '/images/reviews/review-6.jpg',
     },
   ];
@@ -52,21 +52,12 @@ export default function ReviewsSection() {
             >
               {/* Review Image */}
               <div className="relative w-full h-80 bg-white mb-4 rounded-lg overflow-hidden border border-gray-200">
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center p-6">
-                    <div className="text-4xl mb-2">📝</div>
-                    <p className="text-gray-600 text-sm">
-                      후기 이미지
-                    </p>
-                  </div>
-                </div>
-                {/* Uncomment when images are available */}
-                {/* <Image
+                <Image
                   src={review.image}
                   alt={review.title}
                   fill
                   className="object-contain p-2"
-                /> */}
+                />
               </div>
 
               {/* Review Title */}
