@@ -35,7 +35,6 @@ export default function CTASection() {
             >
               <div className="text-3xl mb-2">📞</div>
               <h4 className="font-bold mb-2">즉시 상담</h4>
-              <p className="text-white/80">010-8074-2642</p>
             </a>
 
             <a
@@ -46,7 +45,6 @@ export default function CTASection() {
             >
               <div className="text-3xl mb-2">💬</div>
               <h4 className="font-bold mb-2">카카오톡 상담</h4>
-              <p className="text-white/80">오픈채팅방 바로가기</p>
             </a>
           </div>
 
