@@ -28,28 +28,30 @@ export default function CTASection() {
           </div>
 
           {/* Contact Methods */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <div className="bg-white/10 backdrop-blur-sm rounded-soft p-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+            <a
+              href="tel:010-8074-2642"
+              className="bg-white/10 backdrop-blur-sm rounded-soft p-6 hover:bg-white/20 transition-colors"
+            >
               <div className="text-3xl mb-2">📞</div>
-              <h4 className="font-bold mb-2">전화 상담</h4>
-              <p className="text-white/80">[전화번호]</p>
-            </div>
+              <h4 className="font-bold mb-2">즉시 상담</h4>
+              <p className="text-white/80">010-8074-2642</p>
+            </a>
 
-            <div className="bg-white/10 backdrop-blur-sm rounded-soft p-6">
+            <a
+              href="https://open.kakao.com/o/suV8gMZg"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-white/10 backdrop-blur-sm rounded-soft p-6 hover:bg-white/20 transition-colors"
+            >
               <div className="text-3xl mb-2">💬</div>
               <h4 className="font-bold mb-2">카카오톡 상담</h4>
-              <p className="text-white/80">[카카오톡 채널]</p>
-            </div>
-
-            <div className="bg-white/10 backdrop-blur-sm rounded-soft p-6">
-              <div className="text-3xl mb-2">📧</div>
-              <h4 className="font-bold mb-2">이메일 상담</h4>
-              <p className="text-white/80">[이메일]</p>
-            </div>
+              <p className="text-white/80">오픈채팅방 바로가기</p>
+            </a>
           </div>
 
           <p className="mt-8 text-white/80">
-            상담 신청 후 24시간 내에 연락드리겠습니다
+            상담 신청 후 빠른 시간 내에 연락드리겠습니다
           </p>
         </div>
       </div>
