@@ -24,17 +24,17 @@ export default function HeroSection() {
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
           <div className="inline-block mb-6 px-5 py-2.5 bg-white rounded-full text-sm font-normal text-primary shadow-xl border-2 border-white">
-            📍 서울 강동구·하남 미사 지역 전문
+            📍 서울 강동구·하남 미사 지역 전문 중개사
           </div>
 
           {/* Main Heading */}
           <h1 className="heading-1 text-white mb-4 leading-[1.2]">
-            팔지 않습니다!<br />찾아 드립니다!
+            매물을 찾으면, 매물을 팔려는<br />중개사를 만납니다!
           </h1>
 
           {/* Sub Heading */}
           <p className="text-xl md:text-2xl mb-8 text-white/90">
-            지역 전문가와 집찾기 | 아파트 매수 전문 중개서비스
+            지역 전문 중개사와 집찾기 서비스
           </p>
 
           {/* Key Points */}
@@ -49,12 +49,6 @@ export default function HeroSection() {
               <span className="text-2xl mr-4">✓</span>
               <p className="text-lg font-medium">
                 의뢰조건에 맞는 매물을 찾아드립니다.
-              </p>
-            </div>
-            <div className="flex items-start text-left bg-white/20 backdrop-blur-md rounded-soft p-4 border-2 border-white/30 shadow-lg hover:bg-white/25 transition-all duration-200">
-              <span className="text-2xl mr-4">✓</span>
-              <p className="text-lg font-medium">
-                철저하게 매수인의 입장에서만 도와드립니다.
               </p>
             </div>
           </div>

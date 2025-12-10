@@ -2,6 +2,7 @@ import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSection from '@/components/sections/HeroSection';
 import ProblemSection from '@/components/sections/ProblemSection';
+import ComparisonSection from '@/components/sections/ComparisonSection';
 import SolutionSection from '@/components/sections/SolutionSection';
 import ProcessSection from '@/components/sections/ProcessSection';
 import CredentialsSection from '@/components/sections/CredentialsSection';
@@ -17,6 +18,7 @@ export default function Home() {
       <Header />
 
       <HeroSection />
+      <ComparisonSection />
       <ProblemSection />
       <SolutionSection />
       <ProcessSection />

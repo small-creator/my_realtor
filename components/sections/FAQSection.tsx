@@ -13,7 +13,7 @@ export default function FAQSection() {
   const faqs: FAQItem[] = [
     {
       question: '중개 수수료는 어떻게 되나요?',
-      answer: '일반 중개사와 동일한 법정 요율이 적용됩니다. (매매가의 0.4~0.5%)',
+      answer: '일반 부동산과 동일한 법정 요율이 적용됩니다. (법정요율적용)',
     },
     {
       question: '정말 매물을 받지 않나요?',
@@ -29,7 +29,7 @@ export default function FAQSection() {
     },
     {
       question: '다른 지역도 가능한가요?',
-      answer: '현재는 서울 강동구와 하남 미사 지역만 서비스를 제공하고 있습니다.',
+      answer: '현재는 지역 전문 중개서비스로 서울 강동구와 하남 미사 지역만 서비스를 제공하고 있습니다.',
     },
   ];
 
