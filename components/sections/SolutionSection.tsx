@@ -1,3 +1,7 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 export default function SolutionSection() {
   const solutions = [
     {
@@ -31,26 +35,44 @@ export default function SolutionSection() {
   return (
     <section className="section-spacing bg-gray-50" id="about">
       <div className="container-custom">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="heading-2 text-gray-900">
             마이중개사는 이렇게 다릅니다
           </h2>
           <p className="text-xl text-gray-600 mt-4">
             매수인만을 위한 차별화된 서비스
           </p>
-        </div>
+        </motion.div>
 
         <div className="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
           {solutions.map((solution, index) => (
-            <div
+            <motion.div
               key={index}
-              className="card hover:shadow-xl bg-white"
+              className="card bg-white"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
+              whileHover={{
+                scale: 1.05,
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                transition: { duration: 0.3 }
+              }}
             >
               {/* Icon & Title */}
               <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-full mb-4">
+                <motion.div
+                  className="inline-flex items-center justify-center w-20 h-20 bg-primary/10 rounded-full mb-4"
+                  whileHover={{ rotate: [0, -10, 10, -10, 0], transition: { duration: 0.5 } }}
+                >
                   <span className="text-4xl">{solution.icon}</span>
-                </div>
+                </motion.div>
                 <h3 className="text-lg font-bold text-primary">
                   {solution.title}
                 </h3>
@@ -59,16 +81,20 @@ export default function SolutionSection() {
               {/* Content */}
               <ul className="space-y-3">
                 {solution.description.map((item, idx) => (
-                  <li
+                  <motion.li
                     key={idx}
                     className="flex items-start text-gray-700 text-sm"
+                    initial={{ opacity: 0, x: -10 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: index * 0.2 + idx * 0.1 }}
                   >
                     <span className="text-primary mr-2 mt-1 flex-shrink-0">✓</span>
                     <span className="leading-relaxed">{item}</span>
-                  </li>
+                  </motion.li>
                 ))}
               </ul>
-            </div>
+            </motion.div>
           ))}
         </div>
       </div>

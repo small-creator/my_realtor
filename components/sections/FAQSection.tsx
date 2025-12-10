@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import { Accordion } from '@mantine/core';
+import { motion } from 'framer-motion';
 
 interface FAQItem {
   question: string;
@@ -8,8 +9,6 @@ interface FAQItem {
 }
 
 export default function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
-
   const faqs: FAQItem[] = [
     {
       question: '중개 수수료는 어떻게 되나요?',
@@ -33,75 +32,93 @@ export default function FAQSection() {
     },
   ];
 
-  const toggleFAQ = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
-
   return (
     <section className="section-spacing bg-gray-50">
       <div className="container-custom">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="heading-2 text-gray-900">
             자주 묻는 질문
           </h2>
           <p className="text-xl text-gray-600 mt-4">
             궁금하신 점을 확인해보세요
           </p>
-        </div>
+        </motion.div>
 
-        <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-soft shadow-soft overflow-hidden"
-            >
-              {/* Question */}
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full text-left p-6 flex items-center justify-between hover:bg-gray-50 transition-colors"
-              >
-                <span className="font-bold text-lg text-gray-900 pr-4">
+        <motion.div
+          className="max-w-3xl mx-auto"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <Accordion
+            variant="separated"
+            radius="md"
+            chevronPosition="right"
+            styles={{
+              item: {
+                backgroundColor: 'white',
+                border: '1px solid #e5e7eb',
+                marginBottom: '12px',
+                '&[data-active]': {
+                  borderColor: '#1a73e8',
+                  boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1)',
+                },
+              },
+              control: {
+                padding: '24px',
+                fontSize: '18px',
+                fontWeight: 700,
+                '&:hover': {
+                  backgroundColor: '#f9fafb',
+                },
+              },
+              content: {
+                padding: '0 24px 24px 24px',
+                fontSize: '16px',
+                color: '#374151',
+              },
+              chevron: {
+                color: '#1a73e8',
+                '&[data-rotate]': {
+                  transform: 'rotate(180deg)',
+                },
+              },
+            }}
+          >
+            {faqs.map((faq, index) => (
+              <Accordion.Item key={index} value={`faq-${index}`}>
+                <Accordion.Control>
                   Q. {faq.question}
-                </span>
-                <svg
-                  className={`w-6 h-6 text-primary flex-shrink-0 transition-transform ${
-                    openIndex === index ? 'transform rotate-180' : ''
-                  }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </button>
+                </Accordion.Control>
+                <Accordion.Panel>
+                  A. {faq.answer}
+                </Accordion.Panel>
+              </Accordion.Item>
+            ))}
+          </Accordion>
+        </motion.div>
 
-              {/* Answer */}
-              {openIndex === index && (
-                <div className="px-6 pb-6">
-                  <div className="pt-4 border-t border-gray-200">
-                    <p className="text-gray-700 leading-relaxed">
-                      A. {faq.answer}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        <div className="text-center mt-12">
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <p className="text-gray-600">
             추가 문의사항이 있으신가요?{' '}
             <a href="https://tr.ee/ezLrPu6yQI" target="_blank" rel="noopener noreferrer" className="text-primary font-bold hover:underline">
               문의하기
             </a>
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

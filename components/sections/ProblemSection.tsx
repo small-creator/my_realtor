@@ -1,3 +1,7 @@
+'use client';
+
+import { motion } from 'framer-motion';
+
 export default function ProblemSection() {
   const problems = [
     {
@@ -21,33 +25,60 @@ export default function ProblemSection() {
   return (
     <section className="section-spacing bg-gray-50" id="problem">
       <div className="container-custom">
-        <div className="text-center mb-16">
+        <motion.div
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <h2 className="heading-2 text-gray-900 leading-[1.2]">
             지금까지의 부동산 중개,<br />이런 경험 있으시죠?
           </h2>
-        </div>
+        </motion.div>
 
         <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
           {problems.map((problem, index) => (
-            <div
+            <motion.div
               key={index}
-              className="card hover:shadow-xl"
+              className="card"
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              whileHover={{
+                scale: 1.03,
+                boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                transition: { duration: 0.2 }
+              }}
             >
               <div className="flex items-start">
-                <span className="text-4xl mr-4 flex-shrink-0">{problem.icon}</span>
+                <motion.span
+                  className="text-4xl mr-4 flex-shrink-0"
+                  initial={{ rotate: 0 }}
+                  whileHover={{ rotate: [0, -15, 15, -15, 0], transition: { duration: 0.5 } }}
+                >
+                  {problem.icon}
+                </motion.span>
                 <p className="text-lg text-gray-700 leading-relaxed">
                   {problem.text}
                 </p>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+        >
           <p className="text-xl text-gray-600 font-medium">
             이제는 <span className="text-primary font-bold">다른 방식</span>이 필요합니다
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

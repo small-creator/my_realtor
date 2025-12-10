@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import CTAButton from '../CTAButton';
 
 export default function HeroSection() {
@@ -23,45 +24,75 @@ export default function HeroSection() {
       <div className="container-custom relative z-10 text-center text-white pb-20">
         <div className="max-w-4xl mx-auto">
           {/* Badge */}
-          <div className="inline-block mb-6 px-5 py-2.5 bg-white rounded-full text-sm font-normal text-primary shadow-xl border-2 border-white">
+          <motion.div
+            className="inline-block mb-6 px-5 py-2.5 bg-white rounded-full text-sm font-normal text-primary shadow-xl border-2 border-white"
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
             📍 서울 강동구·하남 미사 지역 전문 중개사
-          </div>
+          </motion.div>
 
           {/* Main Heading */}
-          <h1 className="heading-1 text-white mb-4 leading-[1.2]">
+          <motion.h1
+            className="heading-1 text-white mb-4 leading-[1.2]"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+          >
             매물을 찾으면, 매물을 팔려는<br />중개사를 만납니다!
-          </h1>
+          </motion.h1>
 
           {/* Sub Heading */}
-          <p className="text-xl md:text-2xl mb-8 text-white/90">
+          <motion.p
+            className="text-xl md:text-2xl mb-8 text-white/90"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
             지역 전문 중개사와 집찾기 서비스
-          </p>
+          </motion.p>
 
           {/* Key Points */}
           <div className="max-w-2xl mx-auto mb-12 space-y-4">
-            <div className="flex items-start text-left bg-white/20 backdrop-blur-md rounded-soft p-4 border-2 border-white/30 shadow-lg hover:bg-white/25 transition-all duration-200">
+            <motion.div
+              className="flex items-start text-left bg-white/20 backdrop-blur-md rounded-soft p-4 border-2 border-white/30 shadow-lg hover:bg-white/25 hover:scale-105 transition-all duration-200"
+              initial={{ opacity: 0, x: -30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 }}
+            >
               <span className="text-2xl mr-4">✓</span>
               <p className="text-lg font-medium">
                 매물 접수 받지 않습니다. 그래서 팔지 않습니다.
               </p>
-            </div>
-            <div className="flex items-start text-left bg-white/20 backdrop-blur-md rounded-soft p-4 border-2 border-white/30 shadow-lg hover:bg-white/25 transition-all duration-200">
+            </motion.div>
+            <motion.div
+              className="flex items-start text-left bg-white/20 backdrop-blur-md rounded-soft p-4 border-2 border-white/30 shadow-lg hover:bg-white/25 hover:scale-105 transition-all duration-200"
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6, delay: 0.8 }}
+            >
               <span className="text-2xl mr-4">✓</span>
               <p className="text-lg font-medium">
                 의뢰조건에 맞는 매물을 찾아드립니다.
               </p>
-            </div>
+            </motion.div>
           </div>
 
           {/* CTA Button */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8">
+          <motion.div
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-8"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 1.0 }}
+          >
             <CTAButton
               text="무료 상담 신청하기"
               href="https://tr.ee/ezLrPu6yQI"
               variant="secondary"
               className="w-full sm:w-auto"
             />
-          </div>
+          </motion.div>
         </div>
       </div>
 

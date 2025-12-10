@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react";
+import { MantineProvider, ColorSchemeScript } from '@mantine/core';
+import '@mantine/core/styles.css';
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -23,9 +25,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
+      <head>
+        <ColorSchemeScript />
+      </head>
       <body className="antialiased">
-        {children}
-        <Analytics />
+        <MantineProvider>
+          {children}
+          <Analytics />
+        </MantineProvider>
       </body>
     </html>
   );
