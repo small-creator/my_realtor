@@ -5,7 +5,7 @@ import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getPostById, getAllPosts } from '@/lib/posts';
+import { getPostById, getAllPosts, type PostItem } from '@/lib/posts';
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
   '부동산 뉴스': { bg: 'bg-sky-100', text: 'text-sky-700' },
