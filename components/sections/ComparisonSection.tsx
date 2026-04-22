@@ -57,7 +57,7 @@ export default function ComparisonSection() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="heading-2 mb-6 text-gray-900">이상하지 않나요?</h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-lg md:text-xl text-gray-600 break-keep px-4">
             다른 분야는 <span className="text-primary font-bold">전문가를 먼저 선택</span>합니다
           </p>
         </motion.div>
@@ -116,7 +116,7 @@ export default function ComparisonSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.6 }}
         >
-          <p className="text-2xl font-bold text-gray-900">
+          <p className="text-lg md:text-2xl font-bold text-gray-900 break-keep px-4">
             미국은 <span className="text-primary">매수자가 중개사를 먼저 선택</span>하고 <span className="text-primary">최적의 매물</span>을 찾습니다.
           </p>
         </motion.div>

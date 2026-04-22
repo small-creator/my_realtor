@@ -42,10 +42,10 @@ export default function SolutionSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="heading-2 text-gray-900">
+          <h2 className="heading-2 text-gray-900 px-4">
             마이중개사는 이렇게 다릅니다
           </h2>
-          <p className="text-xl text-gray-600 mt-4">
+          <p className="text-lg md:text-xl text-gray-600 mt-4 break-keep px-4">
             매수인만을 위한 차별화된 서비스
           </p>
         </motion.div>
@@ -73,7 +73,7 @@ export default function SolutionSection() {
                 >
                   <span className="text-4xl">{solution.icon}</span>
                 </motion.div>
-                <h3 className="text-lg font-bold text-primary">
+                <h3 className="text-base md:text-lg font-bold text-primary break-keep">
                   {solution.title}
                 </h3>
               </div>
@@ -90,7 +90,7 @@ export default function SolutionSection() {
                     transition={{ duration: 0.4, delay: index * 0.2 + idx * 0.1 }}
                   >
                     <span className="text-primary mr-2 mt-1 flex-shrink-0">✓</span>
-                    <span className="leading-relaxed">{item}</span>
+                    <span className="leading-relaxed break-keep">{item}</span>
                   </motion.li>
                 ))}
               </ul>

@@ -1,9 +1,13 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
+  const isHome = pathname === '/';
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +19,10 @@ export default function Header() {
   }, []);
 
   const scrollToSection = (sectionId: string) => {
+    if (!isHome) {
+      window.location.href = `/#${sectionId}`;
+      return;
+    }
     const element = document.getElementById(sectionId);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
@@ -25,21 +33,23 @@ export default function Header() {
     window.open('https://tr.ee/ezLrPu6yQI', '_blank', 'noopener,noreferrer');
   };
 
+  const headerBg = !isHome || isScrolled;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white shadow-md' : 'bg-transparent'
+        headerBg ? 'bg-white shadow-md' : 'bg-transparent'
       }`}
     >
       <nav className="container-custom">
         <div className="flex items-center justify-between h-16 md:h-20">
           {/* Logo */}
           <div className="flex items-center">
-            <h1 className={`text-xl md:text-2xl font-bold transition-colors ${
-              isScrolled ? 'text-primary' : 'text-white'
+            <Link href="/" className={`text-xl md:text-2xl font-bold transition-colors ${
+              headerBg ? 'text-primary' : 'text-white'
             }`}>
               마이중개사
-            </h1>
+            </Link>
           </div>
 
           {/* Navigation Links - Hidden on mobile */}
@@ -47,7 +57,7 @@ export default function Header() {
             <button
               onClick={() => scrollToSection('about')}
               className={`transition-all font-medium ${
-                isScrolled
+                headerBg
                   ? 'text-gray-900 hover:text-primary'
                   : 'text-white hover:text-white hover:scale-105 hover:drop-shadow-lg'
               }`}
@@ -57,7 +67,7 @@ export default function Header() {
             <button
               onClick={() => scrollToSection('process')}
               className={`transition-all font-medium ${
-                isScrolled
+                headerBg
                   ? 'text-gray-900 hover:text-primary'
                   : 'text-white hover:text-white hover:scale-105 hover:drop-shadow-lg'
               }`}
@@ -67,7 +77,7 @@ export default function Header() {
             <button
               onClick={() => scrollToSection('credentials')}
               className={`transition-all font-medium ${
-                isScrolled
+                headerBg
                   ? 'text-gray-900 hover:text-primary'
                   : 'text-white hover:text-white hover:scale-105 hover:drop-shadow-lg'
               }`}
@@ -77,13 +87,23 @@ export default function Header() {
             <button
               onClick={() => scrollToSection('area')}
               className={`transition-all font-medium ${
-                isScrolled
+                headerBg
                   ? 'text-gray-900 hover:text-primary'
                   : 'text-white hover:text-white hover:scale-105 hover:drop-shadow-lg'
               }`}
             >
               서비스 지역
             </button>
+            <Link
+              href="/board"
+              className={`transition-all font-medium ${
+                headerBg
+                  ? 'text-gray-900 hover:text-primary'
+                  : 'text-white hover:text-white hover:scale-105 hover:drop-shadow-lg'
+              } ${pathname?.startsWith('/board') ? (headerBg ? 'text-primary' : 'text-white font-bold') : ''}`}
+            >
+              뉴스&팁
+            </Link>
           </div>
 
           {/* CTA Button */}
@@ -91,7 +111,7 @@ export default function Header() {
             <button
               onClick={handleCTAClick}
               className={`text-sm md:text-base py-2 md:py-3 px-4 md:px-6 font-bold rounded-soft transition-all duration-200 hover:scale-105 ${
-                isScrolled
+                headerBg
                   ? 'bg-primary hover:bg-primary-dark text-white shadow-soft'
                   : 'bg-white hover:bg-gray-50 text-primary shadow-lg hover:shadow-xl'
               }`}

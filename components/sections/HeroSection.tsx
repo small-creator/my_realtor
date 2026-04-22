@@ -40,7 +40,7 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
-            매물을 찾으면, 매물을 팔려는<br />중개사를 만납니다!
+            매물을 찾으면, <br className="md:hidden" />매물을 팔려는<br />중개사를 만납니다!
           </motion.h1>
 
           {/* Sub Heading */}
@@ -61,8 +61,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.6 }}
             >
-              <span className="text-2xl mr-4">✓</span>
-              <p className="text-lg font-medium">
+              <span className="text-2xl mr-4 flex-shrink-0">✓</span>
+              <p className="text-base md:text-lg font-medium break-keep">
                 매물 접수 받지 않습니다. 그래서 팔지 않습니다.
               </p>
             </motion.div>
@@ -72,8 +72,8 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.8 }}
             >
-              <span className="text-2xl mr-4">✓</span>
-              <p className="text-lg font-medium">
+              <span className="text-2xl mr-4 flex-shrink-0">✓</span>
+              <p className="text-base md:text-lg font-medium break-keep">
                 의뢰조건에 맞는 매물을 찾아드립니다.
               </p>
             </motion.div>

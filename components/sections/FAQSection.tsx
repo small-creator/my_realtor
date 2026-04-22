@@ -42,10 +42,10 @@ export default function FAQSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="heading-2 text-gray-900">
+          <h2 className="heading-2 text-gray-900 px-4">
             자주 묻는 질문
           </h2>
-          <p className="text-xl text-gray-600 mt-4">
+          <p className="text-lg md:text-xl text-gray-600 mt-4 break-keep px-4">
             궁금하신 점을 확인해보세요
           </p>
         </motion.div>
@@ -72,17 +72,27 @@ export default function FAQSection() {
                 },
               },
               control: {
-                padding: '24px',
-                fontSize: '18px',
+                padding: '16px 20px',
+                fontSize: '16px',
                 fontWeight: 700,
                 '&:hover': {
                   backgroundColor: '#f9fafb',
                 },
+                '@media (min-width: 768px)': {
+                  padding: '24px',
+                  fontSize: '18px',
+                },
               },
               content: {
-                padding: '0 24px 24px 24px',
-                fontSize: '16px',
+                padding: '0 20px 16px 20px',
+                fontSize: '14px',
                 color: '#374151',
+                lineHeight: '1.6',
+                wordBreak: 'keep-all',
+                '@media (min-width: 768px)': {
+                  padding: '0 24px 24px 24px',
+                  fontSize: '16px',
+                },
               },
               chevron: {
                 color: '#1a73e8',
@@ -112,7 +122,7 @@ export default function FAQSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <p className="text-gray-600">
+          <p className="text-sm md:text-base text-gray-600 break-keep px-4">
             추가 문의사항이 있으신가요?{' '}
             <a href="https://tr.ee/ezLrPu6yQI" target="_blank" rel="noopener noreferrer" className="text-primary font-bold hover:underline">
               문의하기

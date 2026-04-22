@@ -32,8 +32,8 @@ export default function ProblemSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="heading-2 text-gray-900 leading-[1.2]">
-            지금까지의 부동산 중개,<br />이런 경험 있으시죠?
+          <h2 className="text-3xl md:text-5xl font-bold text-gray-900 leading-[1.3] px-4">
+            <span className="whitespace-nowrap">지금까지의 부동산 중개,</span><br />이런 경험 있으시죠?
           </h2>
         </motion.div>
 
@@ -60,7 +60,7 @@ export default function ProblemSection() {
                 >
                   {problem.icon}
                 </motion.span>
-                <p className="text-lg text-gray-700 leading-relaxed">
+                <p className="text-base md:text-lg text-gray-700 leading-relaxed break-keep">
                   {problem.text}
                 </p>
               </div>
@@ -75,7 +75,7 @@ export default function ProblemSection() {
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
-          <p className="text-xl text-gray-600 font-medium">
+          <p className="text-lg md:text-xl text-gray-600 font-medium break-keep px-4">
             이제는 <span className="text-primary font-bold">다른 방식</span>이 필요합니다
           </p>
         </motion.div>
