@@ -24,18 +24,17 @@ function formatDate(dateString: string) {
 function renderMarkdown(content: string) {
   let html = content;
 
-  // 1. 헤더 및 기본 요소 변환 (기존 유지)
+  // 1. 기본 마크다운 요소 변환
   html = html.replace(/^# (.+)$/gm, '<h1 class="text-3xl font-bold text-gray-900 mt-12 mb-6 pb-2 border-b-2 border-gray-200">$1</h1>');
   html = html.replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b border-gray-100">$1</h2>');
-  html = html.replace(/^### (.+)$/gm, '<h3 class="text-xl font-semibold text-gray-800 mt-8 mb-3">$1</h3>');
-  html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
+  html = html.replace(/^### (.+)$/gm, '<h3 class="text-xl font-semibold text-gray-800 mt-8 mb-4">$1</h3>');
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="font-bold text-gray-900">$1</strong>');
   html = html.replace(/^> (.+)$/gm, '<blockquote class="border-l-4 border-primary bg-primary/5 px-5 py-4 my-6 rounded-r-lg text-gray-700 italic">$1</blockquote>');
   
-  // 2. 리스트 처리 개선
+  // 2. 리스트 및 테이블 처리
   html = html.replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 mb-2"><span class="text-primary mt-1.5 text-xs">●</span><span>$1</span></li>');
   html = html.replace(/(<li.*<\/li>\n?)+/g, '<ul class="my-6 space-y-1">$&</ul>');
-
-  // 3. 테이블 처리 (기존 유지)
+  
   html = html.replace(/^\|(.+)\|$/gm, (match) => {
     const cells = match.split('|').filter(Boolean).map((c) => c.trim());
     if (cells.every((c) => /^[-:]+$/.test(c))) return '';
@@ -45,16 +44,30 @@ function renderMarkdown(content: string) {
   });
   html = html.replace(/(<tr>.*<\/tr>\n?)+/g, '<div class="overflow-x-auto my-6"><table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100"><tbody>$&</tbody></table></div>');
 
-  // 4. 문단 처리 로직 강화 (엔터 두 번은 새로운 문단, 엔터 한 번은 줄바꿈)
-  const paragraphs = html.split(/\n\s*\n/);
-  html = paragraphs
-    .map((p) => {
-      const trimmed = p.trim();
+  // 3. 블록 단위 분리 및 문단 래핑
+  // 이미 HTML 태그로 감싸진 블록들(h1~h3, blockquote, ul, div 등)을 기준으로 나눕니다.
+  const blocks = html.split(/(\s*<(?:h[1-6]|blockquote|ul|div|table)[^>]*>[\s\S]*?<\/(?:h[1-6]|blockquote|ul|div|table)>)/g);
+  
+  html = blocks
+    .map((block) => {
+      const trimmed = block.trim();
       if (!trimmed) return '';
+      
+      // 이미 완성된 HTML 태그 블록인 경우 그대로 반환
       if (trimmed.startsWith('<')) return trimmed;
-      // 일반 텍스트 내의 싱글 엔터를 <br />로 변환
-      const withBr = trimmed.replace(/\n/g, '<br />');
-      return `<p class="text-gray-600 leading-relaxed mb-6">${withBr}</p>`;
+      
+      // 일반 텍스트 블록인 경우
+      // 엔터 두 번(\n\n)을 기준으로 문단 분리
+      return trimmed
+        .split(/\n\s*\n/)
+        .map(p => {
+          const line = p.trim();
+          if (!line) return '';
+          // 문단 내부의 싱글 엔터를 <br />로 변환
+          const withBr = line.replace(/\n/g, '<br />');
+          return `<p class="text-gray-600 leading-relaxed mb-6">${withBr}</p>`;
+        })
+        .join('\n');
     })
     .join('\n');
 
