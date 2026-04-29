@@ -1,3 +1,6 @@
+import fs from 'fs';
+import path from 'path';
+
 export interface PostItem {
   id: number;
   title: string;
@@ -8,26 +11,27 @@ export interface PostItem {
   createdAt: string;
 }
 
-export async function getAllPosts(): Promise<PostItem[]> {
+function readPostsFromFile(): PostItem[] {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || '';
-    const res = await fetch(`${baseUrl}/api/posts`, {
-      cache: 'no-store', // 최신 데이터 보장
-    });
-    const data = await res.json();
-    return data.sort((a: PostItem, b: PostItem) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
-  } catch (error) {
-    console.error('Failed to fetch posts:', error);
+    const filePath = path.join(process.cwd(), 'public/data/posts.json');
+    const data = fs.readFileSync(filePath, 'utf8');
+    const posts: PostItem[] = JSON.parse(data);
+    return posts.sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  } catch {
     return [];
   }
 }
 
-export async function getPostById(id: number): Promise<PostItem | undefined> {
-  const posts = await getAllPosts();
-  return posts.find((p) => p.id === id);
+export function getAllPosts(): PostItem[] {
+  return readPostsFromFile();
 }
 
-export async function getRecentPosts(count: number = 3): Promise<PostItem[]> {
-  const posts = await getAllPosts();
-  return posts.slice(0, count);
+export function getPostById(id: number): PostItem | undefined {
+  return readPostsFromFile().find((p) => p.id === id);
+}
+
+export function getRecentPosts(count: number = 3): PostItem[] {
+  return readPostsFromFile().slice(0, count);
 }

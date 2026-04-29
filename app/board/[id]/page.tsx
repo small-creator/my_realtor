@@ -1,11 +1,9 @@
-'use client';
-
-import { useState, useEffect } from 'react';
-import { useParams, useRouter } from 'next/navigation';
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { getPostById, getAllPosts, type PostItem } from '@/lib/posts';
+import { getPostById, getAllPosts } from '@/lib/posts';
+import { notFound } from 'next/navigation';
 
 const categoryColors: Record<string, { bg: string; text: string }> = {
   '부동산 뉴스': { bg: 'bg-sky-100', text: 'text-sky-700' },
@@ -58,50 +56,45 @@ function renderMarkdown(content: string) {
   return html;
 }
 
-export default function BoardDetailPage() {
-  const params = useParams();
-  const router = useRouter();
-  const id = Number(params?.id);
-  const [post, setPost] = useState<PostItem | null>(null);
-  const [allPosts, setAllPosts] = useState<PostItem[]>([]);
-  const [loading, setLoading] = useState(true);
+export function generateStaticParams() {
+  const posts = getAllPosts();
+  return posts.map((post) => ({ id: String(post.id) }));
+}
 
-  useEffect(() => {
-    async function loadPost() {
-      const all = await getAllPosts();
-      setAllPosts(all);
-      const found = all.find(p => p.id === id);
-      setPost(found || null);
-      setLoading(false);
-    }
-    loadPost();
-  }, [id]);
-
-  if (loading) {
-    return (
-      <main className="min-h-screen bg-gray-50 text-center flex flex-col items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mb-4"></div>
-        <p className="text-gray-400">데이터를 불러오는 중...</p>
-      </main>
-    );
-  }
+export function generateMetadata({ params }: { params: { id: string } }): Metadata {
+  const post = getPostById(Number(params.id));
 
   if (!post) {
-    return (
-      <main className="min-h-screen bg-gray-50">
-        <Header />
-        <div className="pt-32 pb-20 text-center">
-          <div className="text-6xl mb-6">😔</div>
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">게시글을 찾을 수 없습니다</h2>
-          <Link href="/board" className="text-primary hover:underline font-medium">
-            ← 목록으로 돌아가기
-          </Link>
-        </div>
-        <Footer />
-      </main>
-    );
+    return { title: '게시글을 찾을 수 없습니다 | 마이중개사' };
   }
 
+  const description = post.summary.length > 155
+    ? post.summary.slice(0, 155) + '...'
+    : post.summary;
+
+  return {
+    title: `${post.title} | 마이중개사`,
+    description,
+    openGraph: {
+      title: post.title,
+      description,
+      type: 'article',
+      publishedTime: post.createdAt,
+      authors: ['마이중개사'],
+      tags: [post.category, '부동산', '아파트 매수', '강동구', '미사'],
+    },
+  };
+}
+
+export default function BoardDetailPage({ params }: { params: { id: string } }) {
+  const id = Number(params.id);
+  const post = getPostById(id);
+
+  if (!post) {
+    notFound();
+  }
+
+  const allPosts = getAllPosts();
   const currentIndex = allPosts.findIndex((p) => p.id === post.id);
   const prevPost = currentIndex < allPosts.length - 1 ? allPosts[currentIndex + 1] : null;
   const nextPost = currentIndex > 0 ? allPosts[currentIndex - 1] : null;
@@ -113,7 +106,6 @@ export default function BoardDetailPage() {
 
       <div className="pt-28 pb-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Back Navigation */}
           <div className="mb-8">
             <Link
               href="/board"
@@ -126,9 +118,7 @@ export default function BoardDetailPage() {
             </Link>
           </div>
 
-          {/* Article Card */}
           <article className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-            {/* Article Header */}
             <div className="p-8 md:p-12 border-b border-gray-100">
               <span className={`inline-block text-xs font-semibold px-3 py-1.5 rounded-full mb-6 ${colors.bg} ${colors.text}`}>
                 {post.category}
@@ -150,13 +140,11 @@ export default function BoardDetailPage() {
               </div>
             </div>
 
-            {/* Article Body */}
             <div
               className="p-8 md:p-12 prose-custom"
               dangerouslySetInnerHTML={{ __html: renderMarkdown(post.content) }}
             />
 
-            {/* CTA Banner */}
             <div className="mx-8 md:mx-12 mb-8 md:mb-12 bg-gradient-to-r from-primary to-sky-600 rounded-2xl p-8 text-center text-white">
               <h3 className="text-xl font-bold mb-2">전문 상담이 필요하신가요?</h3>
               <p className="text-white/80 mb-6 text-sm">매수 전문 중개사가 1:1로 도와드립니다. 무료 상담을 신청하세요.</p>
@@ -174,7 +162,6 @@ export default function BoardDetailPage() {
             </div>
           </article>
 
-          {/* Prev / Next Navigation */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-8">
             {prevPost ? (
               <Link

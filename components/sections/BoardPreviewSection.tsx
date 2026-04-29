@@ -1,6 +1,3 @@
-'use client';
-
-import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { getRecentPosts, type PostItem } from '@/lib/posts';
 
@@ -21,20 +18,11 @@ function formatDate(dateString: string) {
 }
 
 export default function BoardPreviewSection() {
-  const [recentPosts, setRecentPosts] = useState<PostItem[]>([]);
-
-  useEffect(() => {
-    async function loadRecentPosts() {
-      const posts = await getRecentPosts(3);
-      setRecentPosts(posts);
-    }
-    loadRecentPosts();
-  }, []);
+  const recentPosts = getRecentPosts(3);
 
   return (
     <section className="section-spacing bg-white" id="board">
       <div className="container-custom">
-        {/* Section Header */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm font-semibold px-4 py-2 rounded-full mb-6">
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -50,9 +38,8 @@ export default function BoardPreviewSection() {
           </p>
         </div>
 
-        {/* Posts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto mb-12">
-          {recentPosts.map((post, index) => {
+          {recentPosts.map((post) => {
             const colors = categoryColors[post.category] || { bg: 'bg-gray-100', text: 'text-gray-700' };
             return (
               <Link
@@ -61,7 +48,6 @@ export default function BoardPreviewSection() {
                 className="block group"
               >
                 <div className="bg-gray-50 rounded-2xl border border-gray-100 overflow-hidden hover:shadow-xl hover:border-primary/20 transition-all duration-500 hover:-translate-y-1 h-full flex flex-col">
-                  {/* Decorative gradient bar */}
                   <div className="h-1.5 bg-gradient-to-r from-primary via-sky-400 to-primary-light" />
 
                   <div className="p-6 flex flex-col flex-1">
@@ -93,7 +79,6 @@ export default function BoardPreviewSection() {
           })}
         </div>
 
-        {/* View All Button */}
         <div className="text-center">
           <Link
             href="/board"
