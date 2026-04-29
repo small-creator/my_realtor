@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   description: "팔지 않습니다. 찾아드립니다. 매물 접수 없이 100% 매수인 입장에서 도와드리는 아파트 매수 전문 중개서비스. 서울 강동구, 하남 미사 지역 전문.",
   keywords: "아파트 매수, 강동구 부동산, 미사 부동산, 매수대리, 바이어 에이전트, 부동산 중개, 아파트 구매, 강동구 아파트, 미사 아파트, 하남 부동산",
   verification: {
-    google: 'GOOGLE_VERIFICATION_CODE_HERE',
+    google: 'DLgZhh6tw9ORfVH0KGjGeoDEfVOfmg-OtJu6L6zXDy4',
     other: {
       'naver-site-verification': 'NAVER_VERIFICATION_CODE_HERE',
     },
