@@ -24,14 +24,18 @@ function formatDate(dateString: string) {
 function renderMarkdown(content: string) {
   let html = content;
 
+  // 1. 헤더 및 기본 요소 변환 (기존 유지)
   html = html.replace(/^# (.+)$/gm, '<h1 class="text-3xl font-bold text-gray-900 mt-12 mb-6 pb-2 border-b-2 border-gray-200">$1</h1>');
   html = html.replace(/^## (.+)$/gm, '<h2 class="text-2xl font-bold text-gray-900 mt-10 mb-4 pb-2 border-b border-gray-100">$1</h2>');
   html = html.replace(/^### (.+)$/gm, '<h3 class="text-xl font-semibold text-gray-800 mt-8 mb-3">$1</h3>');
   html = html.replace(/\*\*(.+?)\*\*/g, '<strong class="font-semibold text-gray-900">$1</strong>');
   html = html.replace(/^> (.+)$/gm, '<blockquote class="border-l-4 border-primary bg-primary/5 px-5 py-4 my-6 rounded-r-lg text-gray-700 italic">$1</blockquote>');
+  
+  // 2. 리스트 처리 개선
   html = html.replace(/^- (.+)$/gm, '<li class="flex items-start gap-2 mb-2"><span class="text-primary mt-1.5 text-xs">●</span><span>$1</span></li>');
-  html = html.replace(/(<li.*<\/li>\n?)+/g, '<ul class="my-4 space-y-1">$&</ul>');
+  html = html.replace(/(<li.*<\/li>\n?)+/g, '<ul class="my-6 space-y-1">$&</ul>');
 
+  // 3. 테이블 처리 (기존 유지)
   html = html.replace(/^\|(.+)\|$/gm, (match) => {
     const cells = match.split('|').filter(Boolean).map((c) => c.trim());
     if (cells.every((c) => /^[-:]+$/.test(c))) return '';
@@ -41,15 +45,16 @@ function renderMarkdown(content: string) {
   });
   html = html.replace(/(<tr>.*<\/tr>\n?)+/g, '<div class="overflow-x-auto my-6"><table class="w-full border-collapse bg-white rounded-xl overflow-hidden shadow-sm border border-gray-100"><tbody>$&</tbody></table></div>');
 
-  html = html.replace(/^\d+\. (.+)$/gm, '<li class="flex items-start gap-3 mb-3"><span class="bg-primary text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5"></span><span>$1</span></li>');
-
-  const paragraphs = html.split('\n\n');
+  // 4. 문단 처리 로직 강화 (엔터 두 번은 새로운 문단, 엔터 한 번은 줄바꿈)
+  const paragraphs = html.split(/\n\s*\n/);
   html = paragraphs
     .map((p) => {
       const trimmed = p.trim();
       if (!trimmed) return '';
       if (trimmed.startsWith('<')) return trimmed;
-      return `<p class="text-gray-600 leading-relaxed mb-4">${trimmed}</p>`;
+      // 일반 텍스트 내의 싱글 엔터를 <br />로 변환
+      const withBr = trimmed.replace(/\n/g, '<br />');
+      return `<p class="text-gray-600 leading-relaxed mb-6">${withBr}</p>`;
     })
     .join('\n');
 
